@@ -1,7 +1,7 @@
 // These options control the camera position after animation
 const start = {
     center: [66, 48],
-    zoom: 5 ,
+    zoom: 2,
     pitch: 0,
     bearing: 0
 };
