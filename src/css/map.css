@@ -149,19 +149,26 @@ body {
 
 .picBbf {
     top: 30px;
-    right: 90px;
-    width: 500px;
+    right: 90px;    
+    width: 450px;
     height: 300px;
 }
 
 .textBbf {
     background: linear-gradient(90deg, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.75) 100%);
     top: 30px;
-    right: 900px;
-    width: 500px;
-    height: 150px;
-    padding: 50px;
+    right: 800px;
+    width: 450px;
+    height: 120px;
+    padding: 15px;
     line-height: 140%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.textBbf span {
+    text-align: center;
 }
 
 .bbf img {
