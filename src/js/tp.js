@@ -11,6 +11,30 @@ const bbfPoint = {
     bearing: 90,
     pitch: 75,
 };
+const batPoint = {
+    center: [74.83143, 47.43429],
+    zoom: 14,
+    bearing: 79.35608,
+    pitch: 56.98072,
+};
+const ttpPoint = {
+    center: [76.9962896, 44.05961],
+    zoom: 15.81,
+    bearing: 152.9264,
+    pitch: 73.9188,
+};
+const wbutPoint = {
+    center: [77.1170973, 43.1696826],
+    zoom: 14.74,
+    bearing: 112.14607,
+    pitch: 76.1594,
+};
+const kainPoint = {
+    center: [78.4676862, 42.9771830],
+    zoom: 13.90,
+    bearing: 158.0138,
+    pitch: 77.0389,
+};
 
 mapboxgl.accessToken = 'pk.eyJ1IjoicmFzc2Nyb20iLCJhIjoiY2wyNzlrcDY2MGk5cDNqcW5wZW9mZW5kciJ9.zdI6zJ4KbGx-V8mq1KoUCg';
 const map = new mapboxgl.Map({
@@ -20,6 +44,27 @@ const map = new mapboxgl.Map({
     projection: 'globe',
     ...start,
 });
+
+// map.on('load', () => {
+//     map.addSource('bbfRoute', {
+//         type: 'geojson',
+//         data: bbfRoute
+//     });
+
+//     map.addLayer({
+//         'id': 'bbfRoute',
+//         'type': 'line',
+//         'source': 'bbfRoute',
+//         'layout': {
+//             'line-join': 'round',
+//             'line-cap': 'round'
+//         },
+//         'paint': {
+//             'line-color': '#d7d727',
+//             'line-width': 4
+//         }
+//     })
+// })
 
 map.on('click', (event) => {
     // If the user clicked on one of your markers, get its information.
@@ -66,6 +111,16 @@ document.getElementById('buttons').addEventListener('click', (event) => {
 let isAtStart = true;
 
 // FLY to 
+const bat = document.getElementById('bat')
+bat.addEventListener('click', () => {
+
+    map.flyTo({
+        ...batPoint,
+        duration: 11000,
+        essential: true
+    })
+})
+
 const bbf = document.getElementById('bbf')
 bbf.addEventListener('click', () => {
 
@@ -75,27 +130,265 @@ bbf.addEventListener('click', () => {
         essential: true
     })
 })
+
+const ttp = document.getElementById('ttp')
+ttp.addEventListener('click', () => {
+
+    map.flyTo({
+        ...ttpPoint,
+        duration: 11000,
+        essential: true
+    })
+})
+
+const wbut = document.getElementById('wbut')
+wbut.addEventListener('click', () => {
+
+    map.flyTo({
+        ...wbutPoint,
+        duration: 11000,
+        essential: true
+    })
+})
+
+const kain = document.getElementById('kain')
+kain.addEventListener('click', () => {
+
+    map.flyTo({
+        ...kainPoint,
+        duration: 11000,
+        essential: true
+    })
+})
+
 let lat;
 let lng;
 let bearing;
 let pitch;
 let zoom;
 let i = 0;
-let txt = 'Burhan-bulak Falls is the tallest waterfall in Kazakhstan. It is located in the Kora River gorge in the Jongar Alatau mountains. At an altitude of 2000 metres, the Falls are 168 metres long.';
+let txt = ['Burhan-bulak Falls is the tallest waterfall in Kazakhstan. It is located in the Kora River gorge in the Jongar Alatau mountains. At an altitude of 2000 metres, the Falls are 168 metres long.',
+'Bektauata is a range of mountains in Aktogay District, Karaganda, Kazakhstan. There is almost no vegetation on the slopes of the range, which are bare and rocky. In the valleys and by some of the rockpools there is tree growth, including aspen and willow, as well as shrubs.',
+'Petroglyphs are included in the State list of historical and cultural monuments of local significance of the Almaty region, 2010 as a monument of the "early iron"era. This Dating is incorrect. The monument has been under state protection since 1981, but there is no physical protection at the site.',
+"This place is absolutely amazing and well worth a visit. It's situated only approximately 30 minutes from the city, easy to locate and hard to get lost in. there is a steady climb of a couple kilometres into the mountains and then a very rough couple kilometres through boulders and stinging nettle.",
+"Lake Kaindy is located in the south of Kazakhstan, within Kolsay Lakes National Park. It is located 2,000 metres (6,600 ft) above sea level. The lake contains trunks of submerged Picea schrenkiana trees that rise above the surface of the lake.",
+"",
+];
 let speed = 30;
-function onMapClick(e) {
+
+function kainFunc(e) {
     lat = map.getCenter().lat;
-    lng = map.getCenter().lng;
+    lng = map.getCenter().lng.toFixed(7);
     bearing = map.getBearing();
     pitch = map.getPitch();
     zoom = map.getZoom();
     
-    if ((12.5 <= zoom) && (74.5 <= pitch <= 75.5) && (bbfPoint.center[1] - 0.5 <= lat <= bbfPoint.center[1] + 0.5) && (bbfPoint.center[0] - 0.5 <= lng <= bbfPoint.center[0] + 0.5)) {
+    if ((11 <= zoom) && (kainPoint.pitch - 0.5 <= pitch <= kainPoint.pitch + 0.5) && (kainPoint.center[1] - 0.1 <= lat <= kainPoint.center[1] + 0.1) && (parseFloat(lng) === kainPoint.center[0])) {
+        document.getElementsByClassName('kain')[0].style.visibility = 'visible';
+        document.getElementsByClassName('kain')[0].style.opacity = '1';
+        document.getElementsByClassName('kain')[1].style.visibility = 'visible';
+        document.getElementsByClassName('kain')[1].style.opacity = '1';
+        typedKain.pause(500).go()
+    } else {
+        document.getElementsByClassName('kain')[0].style.visibility = 'hidden'
+        document.getElementsByClassName('kain')[0].style.opacity = '0';
+        document.getElementsByClassName('kain')[1].style.visibility = 'hidden'
+        document.getElementsByClassName('kain')[1].style.opacity = '0';
+
+    }
+
+}
+map.on('render', kainFunc);
+
+let typedKain = new TypeIt("#spanKain", {
+    speed: 30,
+    strings: [txt[4]],
+    cursorChar: "⭐",
+    cursor: {
+      autoPause: false,
+      animation: {
+        options: {
+          duration: 1000,
+          easing: "linear",
+          direction: "alternate",
+        },
+        frames: [
+          {
+            transformOrigin: "0.575em 0.7em",
+            transform: "rotate(0deg) scale(1)",
+          },
+          {
+            transformOrigin: "0.575em 0.7em",
+            transform: "rotate(360deg) scale(2.5)",
+          },
+        ],
+      },
+    },
+});
+
+function wbutFunc(e) {
+    lat = map.getCenter().lat;
+    lng = map.getCenter().lng.toFixed(7);
+    bearing = map.getBearing();
+    pitch = map.getPitch();
+    zoom = map.getZoom();
+    
+    if ((11 <= zoom) && (wbutPoint.pitch - 0.5 <= pitch <= wbutPoint.pitch + 0.5) && (wbutPoint.center[1] - 0.1 <= lat <= wbutPoint.center[1] + 0.1) && (parseFloat(lng) === wbutPoint.center[0])) {
+        document.getElementsByClassName('wbut')[0].style.visibility = 'visible';
+        document.getElementsByClassName('wbut')[0].style.opacity = '1';
+        document.getElementsByClassName('wbut')[1].style.visibility = 'visible';
+        document.getElementsByClassName('wbut')[1].style.opacity = '1';
+        typedWbut.pause(500).go()
+    } else {
+        document.getElementsByClassName('wbut')[0].style.visibility = 'hidden'
+        document.getElementsByClassName('wbut')[0].style.opacity = '0';
+        document.getElementsByClassName('wbut')[1].style.visibility = 'hidden'
+        document.getElementsByClassName('wbut')[1].style.opacity = '0';
+
+    }
+
+}
+map.on('render', wbutFunc);
+
+let typedWbut = new TypeIt("#spanWbut", {
+    speed: 30,
+    strings: [txt[3]],
+    cursorChar: "⭐",
+    cursor: {
+      autoPause: false,
+      animation: {
+        options: {
+          duration: 1000,
+          easing: "linear",
+          direction: "alternate",
+        },
+        frames: [
+          {
+            transformOrigin: "0.575em 0.7em",
+            transform: "rotate(0deg) scale(1)",
+          },
+          {
+            transformOrigin: "0.575em 0.7em",
+            transform: "rotate(360deg) scale(2.5)",
+          },
+        ],
+      },
+    },
+  });
+
+function ttpFunc(e) {
+    lat = map.getCenter().lat;
+    lng = map.getCenter().lng.toFixed(7);
+    bearing = map.getBearing();
+    pitch = map.getPitch();
+    zoom = map.getZoom();
+    
+    if ((11 <= zoom) && (ttpPoint.pitch - 0.5 <= pitch <= ttpPoint.pitch + 0.5) && (ttpPoint.center[1] - 0.1 <= lat <= ttpPoint.center[1] + 0.1) && (parseFloat(lng) === ttpPoint.center[0])) {
+        document.getElementsByClassName('ttp')[0].style.visibility = 'visible';
+        document.getElementsByClassName('ttp')[0].style.opacity = '1';
+        document.getElementsByClassName('ttp')[1].style.visibility = 'visible';
+        document.getElementsByClassName('ttp')[1].style.opacity = '1';
+        typedTtp.pause(500).go()
+    } else {
+        document.getElementsByClassName('ttp')[0].style.visibility = 'hidden'
+        document.getElementsByClassName('ttp')[0].style.opacity = '0';
+        document.getElementsByClassName('ttp')[1].style.visibility = 'hidden'
+        document.getElementsByClassName('ttp')[1].style.opacity = '0';
+
+    }
+
+}
+map.on('render', ttpFunc);
+
+let typedTtp = new TypeIt("#spanTtp", {
+    speed: 30,
+    strings: [txt[2]],
+    cursorChar: "⭐",
+    cursor: {
+      autoPause: false,
+      animation: {
+        options: {
+          duration: 1000,
+          easing: "linear",
+          direction: "alternate",
+        },
+        frames: [
+          {
+            transformOrigin: "0.575em 0.7em",
+            transform: "rotate(0deg) scale(1)",
+          },
+          {
+            transformOrigin: "0.575em 0.7em",
+            transform: "rotate(360deg) scale(2.5)",
+          },
+        ],
+      },
+    },
+  });
+
+function batFunc(e) {
+    lat = map.getCenter().lat;
+    lng = map.getCenter().lng.toFixed(5);
+    bearing = map.getBearing();
+    pitch = map.getPitch();
+    zoom = map.getZoom();
+    
+    if ((11 <= zoom) && (batPoint.pitch - 0.5 <= pitch <= batPoint.pitch + 0.5) && (batPoint.center[1] - 0.1 <= lat <= batPoint.center[1] + 0.1) && (parseFloat(lng) === batPoint.center[0])) {
+        document.getElementsByClassName('bat')[0].style.visibility = 'visible';
+        document.getElementsByClassName('bat')[0].style.opacity = '1';
+        document.getElementsByClassName('bat')[1].style.visibility = 'visible';
+        document.getElementsByClassName('bat')[1].style.opacity = '1';
+        typedBat.pause(500).go()
+    } else {
+        document.getElementsByClassName('bat')[0].style.visibility = 'hidden'
+        document.getElementsByClassName('bat')[0].style.opacity = '0';
+        document.getElementsByClassName('bat')[1].style.visibility = 'hidden'
+        document.getElementsByClassName('bat')[1].style.opacity = '0';
+
+    }
+
+}
+map.on('render', batFunc);
+
+let typedBat = new TypeIt("#spanBat", {
+    speed: 30,
+    strings: [txt[1]],
+    cursorChar: "⭐",
+    cursor: {
+      autoPause: false,
+      animation: {
+        options: {
+          duration: 1000,
+          easing: "linear",
+          direction: "alternate",
+        },
+        frames: [
+          {
+            transformOrigin: "0.575em 0.7em",
+            transform: "rotate(0deg) scale(1)",
+          },
+          {
+            transformOrigin: "0.575em 0.7em",
+            transform: "rotate(360deg) scale(2.5)",
+          },
+        ],
+      },
+    },
+  });
+
+function bbfFunc(e) {
+    lat = map.getCenter().lat;
+    lng = map.getCenter().lng.toFixed(5);
+    bearing = map.getBearing();
+    pitch = map.getPitch();
+    zoom = map.getZoom();
+    
+    if ((12.5 <= zoom) && (74.5 <= pitch <= 75.5) && (bbfPoint.center[1] - 0.1 <= lat <= bbfPoint.center[1] + 0.1) && (parseFloat(lng) === bbfPoint.center[0])) {
         document.getElementsByClassName('bbf')[0].style.visibility = 'visible';
         document.getElementsByClassName('bbf')[0].style.opacity = '1';
         document.getElementsByClassName('bbf')[1].style.visibility = 'visible';
         document.getElementsByClassName('bbf')[1].style.opacity = '1';
-        typed.pause(500).go()
+        typedBbf.pause(500).go()
     } else {
         document.getElementsByClassName('bbf')[0].style.visibility = 'hidden'
         document.getElementsByClassName('bbf')[0].style.opacity = '0';
@@ -104,11 +397,11 @@ function onMapClick(e) {
 
     }
 }
-map.on('render', onMapClick);
+map.on('render', bbfFunc);
 
-let typed = new TypeIt("#spanBbf", {
+let typedBbf = new TypeIt("#spanBbf", {
     speed: 30,
-    strings: [txt],
+    strings: [txt[0]],
     cursorChar: "⭐",
     cursor: {
       autoPause: false,

@@ -1,11 +1,17 @@
 @import url('https://fonts.googleapis.com/css2?family=Abhaya+Libre&family=Josefin+Sans:ital@0;1&family=Readex+Pro:wght@300;400;500&family=Rye&display=swap');
 
+:root {
+	--index: calc(1vw + 1vh);
+	--text: #d7d727;
+	--transition: transform .75s cubic-bezier(.075, .5, 0, 1);
+}
+
 .main {
     flex: 1 1 auto;
 }
 
 [class*="-container"] {
-    max-width: 1470px;
+    max-width: 1106px;
     margin: 0 auto;
     padding: 0 15px;
 }
@@ -15,7 +21,7 @@
     font-size: 3.5rem;
     text-align: center;
     margin-top: 10rem;
-    margin-bottom: 10rem;
+    margin-bottom: 5rem;
     width: 100%;
     text-align: start;
 }
@@ -40,8 +46,14 @@
     background-size: cover;
     background-attachment: fixed;
     height: 100vh;
-    z-index: 20;
+    /* z-index: 20; */
     width: 100%;
+}
+
+.layer {
+	will-change: transform;
+	z-index: 2;
+	transition: var(--transition);
 }
 
 .hero-bg__bottom {
@@ -50,11 +62,12 @@
     left: 0;
     right: 0;
     bottom: 0;
-    width: 100wh;
     height: 100vh;
-    z-index: inherit;
+    z-index: 100;
     background-attachment: fixed;
     background: url(../img/trees.png);
+    background-position: center;
+    background-size: cover;
 }
 
 .hero-container {
@@ -67,7 +80,7 @@
     top: 0;
     left: 0;
     width: 100%;
-    z-index: 25;
+    z-index: 1000;
     transition: all .3s ease-in;
     background: rgba(0, 0, 1, 0);
 }
@@ -135,8 +148,7 @@
     font-family: 'Josefin Sans';
     font-style: normal;
     font-weight: 700;
-    font-size: 10vw;
-    /* color: #E5C076; */
+    font-size: 140px;
     z-index: 10;
     text-transform: uppercase;
     background: url(../img/2.png);
@@ -170,7 +182,7 @@
     justify-content: space-between;
     align-items: center;
     background-color: #B96C12;
-    margin-bottom: 148px;
+    margin-bottom: 40px;
     max-height: 500px;
     border-radius: 1rem;
 }
@@ -181,13 +193,15 @@
 }
 
 .maps-card:nth-child(odd) .maps-card__img {
-    align-items: flex-start;
-    flex: 0 0 0;
+    align-items: center;
+    justify-content: center;
 }
 
 .maps-card:nth-child(odd) .maps-card__text {
-    align-items: flex-start;
-    margin-right: 6.43rem;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    padding-right: 90px;
 }
 
 .maps-card:last-child {
@@ -263,13 +277,14 @@
     display: flex;
     width: 845px;
     height: 650px;
-    align-items: flex-end;
+    align-items: center;
     flex-direction: column;
+    justify-content: center;
 }
 
 .maps-card__img img {
-    width: 845px;
-    height: 650px;
+    width: 543px;
+    height: 410px;
 }
 
 /* MAPS  */
@@ -290,22 +305,26 @@
 .mission-block {
     display: flex;
     flex-wrap: wrap;
+    width: 100%;
 }
 
 .mission-block__highlight {
-    width: 33%;
-    font-size: 1.9rem;
-    margin-bottom: 50px;
+    flex-grow: 1;
+    width: 356px;
+    font-size: 24px;
+    margin-bottom: 30px;
+    padding: 5px;
+    text-align: center;
 }
 
 .mission-block__highlight img {
-    width: 375px;
-    height: 210px;
+    width: 100%;
+    text-align: center;
 }
 
 .mission-block__highlight span {
     font-family: Rye, cursive;
-    font-size: 64px;
+    font-size: 48px;
 }
 
 /* MISSION  */
