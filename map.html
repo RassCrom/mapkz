@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./src/css/reset.css">
+    <link rel="stylesheet" href="./src/css/map.css">
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.11.0/mapbox-gl.css" rel="stylesheet">
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.11.0/mapbox-gl.js"></script>
+</head>
+<body>
+    <div class="wrapper">
+        <aside class="sidebar">
+            <form action="" class="form">
+                <input name="search-place" id="search-place" type="input" required placeholder="Search"/>
+                <label class="form-label" for="search-place">Search</label>
+            </form> 
+            <ul class="places">
+                <li class="place-items">
+                    <button href="" class="place-links" id="bbf">
+                        Burhan-bulak falls
+                    </button>
+                    <button href="" class="place-links" id="bat">
+                        Bektau-Ata tract
+                    </button>
+                    <button href="" class="place-links" id="ttp">
+                        Tamgaly-tas petroglyphs
+                    </button>
+                    <button href="" class="place-links" id="wbut">
+                        Waterfall "Butakovsky"
+                    </button>
+                    <button href="" class="place-links" id="kain">
+                        Kaindy (lake)
+                    </button>
+                </li>
+            </ul>
+            <ul id="buttons">
+                <li class="button" id="button-en">en</li>
+                <li class="button" id="button-ru">ru</li>
+            </ul>
+        </aside>
+        <div id="map"></div>
+
+        <div class="bbf picBbf" id="picBbf">
+            <img src="./src/img/burhanBulak.jpg" alt="burhan bulak">
+        </div>
+        <div class="bbf textBbf" id="txtBbf">
+            <span id="spanBbf"></span>
+        </div>
+
+    </div>
+
+    <script src="https://unpkg.com/typeit@8.7.0/dist/index.umd.js"></script>
+    <script src="./src/js/tp.js"></script>
+</body>
+</html>
