@@ -424,3 +424,9 @@ let typedBbf = new TypeIt("#spanBbf", {
       },
     },
   });
+
+const closer = document.getElementById('closer')
+closer.addEventListener('click', () => {
+    document.getElementById('welcome-txt').style.opacity = '0';
+    document.getElementById('welcome-txt').style.visibility = 'hidden';
+})

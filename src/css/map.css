@@ -166,11 +166,38 @@ body {
     visibility: hidden;
     position: absolute;
     border-radius: 18px;
-    background-color: blueviolet;
+    background-color: rgb(138, 43, 226);
     box-shadow: 10px 10px 10px black, inset 2px 2px 10px white;
     transition: all .3s;
     opacity: 0;
 }
+
+.welcome-msg {
+    position: absolute;
+    visibility: visible;
+    background-color: rgba(138, 43, 226, 0.8);
+    opacity: 1;
+    width: 44vw;
+    top: 50%;
+    left: 57%;
+    transform: translate(-50%, -50%);
+}
+
+.msg-text {
+    padding: 25px;
+    text-align: center;
+    line-height: 140%;
+    font-size: 18px;
+}
+
+#closer {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    padding: 6px 8px;
+    cursor: pointer;
+}
+
 
 .pic {
     top: 30px;

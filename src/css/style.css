@@ -149,7 +149,7 @@
     font-style: normal;
     font-weight: 700;
     font-size: 140px;
-    z-index: 10;
+    z-index: 1;
     text-transform: uppercase;
     background: url(../img/2.png);
     background-clip: text;
