@@ -19,19 +19,19 @@ window.document.addEventListener('scroll', () => {
     
 })
 
-const qq = document.getElementById('qq');
-const animate = (element,position) => {
-    element.style.transform = `translateY(${position}px)`
-} 
-document.addEventListener('scroll', function(e) {
-    lastKnownScrollPosition = window.scrollY;
+// const qq = document.getElementById('qq');
+// const animate = (element,position) => {
+//     element.style.transform = `translateY(${position}px)`
+// } 
+// document.addEventListener('scroll', function(e) {
+//     lastKnownScrollPosition = window.scrollY;
       
-    window.requestAnimationFrame(function() {
+//     window.requestAnimationFrame(function() {
        
-        animate(qq,lastKnownScrollPosition*.35)
+//         animate(qq,lastKnownScrollPosition*.35)
         
-    });
-});
+//     });
+// });
 
 
 const swiper = new Swiper('.swiper', {

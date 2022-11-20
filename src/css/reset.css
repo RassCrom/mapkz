@@ -45,4 +45,6 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100%;
+    background-color: rgb(23, 20, 27);
+    z-index: 2;
 }
