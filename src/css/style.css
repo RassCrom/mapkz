@@ -147,6 +147,7 @@
     height: 100%;
     font-family: 'Josefin Sans';
     font-style: normal;
+    transform: translate(0);
     font-weight: 700;
     font-size: 140px;
     z-index: 1;

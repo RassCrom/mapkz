@@ -19,19 +19,30 @@ window.document.addEventListener('scroll', () => {
     
 })
 
-// const qq = document.getElementById('qq');
-// const animate = (element,position) => {
-//     element.style.transform = `translateY(${position}px)`
-// } 
-// document.addEventListener('scroll', function(e) {
-//     lastKnownScrollPosition = window.scrollY;
+const qq = document.getElementById('qq');
+
+const animate = (element,position) => {
+    element.style.transform = `translateY(${position}px)`
+} 
+document.addEventListener('scroll', function(e) {
+    lastKnownScrollPosition = window.scrollY;
       
-//     window.requestAnimationFrame(function() {
-       
-//         animate(qq,lastKnownScrollPosition*.35)
+    window.requestAnimationFrame(function() {
+
+      if (lastKnownScrollPosition < 700) {
+        animate(qq,lastKnownScrollPosition*.4)
+      } 
         
-//     });
-// });
+    });
+});
+
+function getTranslateY(element) {
+  const style = window.getComputedStyle(element)
+  const matrix = style['transform'] || style.webkitTransform || style.mozTransform
+  const matrixValues = matrix.match(/matrix.*\((.+)\)/)[1].split(', ')
+
+  return parseInt(matrixValues[5]);
+};
 
 
 const swiper = new Swiper('.swiper', {
